@@ -1,0 +1,4 @@
+(executable
+ (name ocamldot)
+ (libraries re)
+)
