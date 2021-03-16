@@ -880,6 +880,7 @@ Arg.parse
   getDependFromFile usage;
 
 if not(!calledOnFile) then getDependFromStdin();
+(* Printf.printf "// Clusters: '%s';" !node_groups; *)
 print_string "digraph G {\n";
 if !landscape
 then print_string "  size=\"10,7.5\" ;\n  rotate=90 ;\n"
