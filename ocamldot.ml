@@ -857,6 +857,7 @@ let leftToRight = ref false
 let landscape = ref false
 let roots = ref []
 let node_groups = ref ""
+let dpi = ref 300
 ;;
 
 Arg.parse
@@ -875,7 +876,10 @@ Arg.parse
     "          group nodes with names containing group name into clusters");
     ("-r",
      Arg.String(fun s -> roots := s::!roots),
-     "<r>       use <r> as a root in the graph; nodes reachable from <r>\n               will be shown")
+     "<r>       use <r> as a root in the graph; nodes reachable from <r>\n               will be shown");
+    ("-dpi",
+     Arg.Set_int dpi,
+     "<dpi>     set image resolution in dpi\n")
   ]
   getDependFromFile usage;
 
@@ -887,7 +891,7 @@ then print_string "  size=\"10,7.5\" ;\n  rotate=90 ;\n"
 else print_string "  size=\"7.5,10\" ;\n";
 if (!leftToRight) then print_string "  rankdir = LR ;\n"
 else print_string "  rankdir = TB ;\n" ;
-print_string "  graph [dpi = 300] ;\n\n" ;
+Printf.printf "  graph [dpi = %d] ;\n\n" !dpi ;
 
 parse_groups !node_groups
 |> List.map (populate_clusters !nodes)
